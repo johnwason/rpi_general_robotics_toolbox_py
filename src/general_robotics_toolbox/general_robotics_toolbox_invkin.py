@@ -251,6 +251,13 @@ def ur_invkin(robot, desired_pose, last_joints = None):
     
     H = robot.H
     P = robot.P
+    print(P)
+    P2 = np.copy(robot.P)
+    P2[:,4][2] += P[:,5][2]
+    P2[:,5][2] = 0
+    P = P2
+
+    print(P)
 
     assert np.allclose((np.array([ez,-ey,-ey,-ey,-ez,-ey]).T), H) or \
            np.allclose((np.array([ez,ey,ey,ey,-ez,ey]).T), H), \
